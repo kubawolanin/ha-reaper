@@ -82,13 +82,14 @@
     ],
     "repeat": true,
     "metronome": true,
+    "play_state": "stopped",
+    "time_signature": "4/4",
+    "number_of_tracks": 4,
     "beatpos": {
-        "playstate": "stopped",
         "position_seconds": "10.000000000000000",
         "full_beat_position": "20.000000000000000",
         "measure_cnt": "5",
-        "beats_in_measure": "0.000000000010001",
-        "time_signature": "4/4"
+        "beats_in_measure": "0.000000000010001"
     },
     "transport": {
         "playstate": "stopped",
@@ -96,6 +97,5 @@
         "repeat": true,
         "position_string": "6.1.00",
         "position_string_beats": "6.1.00"
-    },
-    "number_of_tracks": 4
+    }
 }

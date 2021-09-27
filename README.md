@@ -1,4 +1,4 @@
-# Reaper DAW
+# REAPER DAW
 
 [![Validate with hassfest](https://github.com/kubawolanin/ha-reaper/actions/workflows/hassfest.yml/badge.svg)](https://github.com/kubawolanin/ha-reaper/actions/workflows/hassfest.yml)
 [![GitHub Release][releases-shield]][releases]
@@ -14,11 +14,22 @@
 # Features
 
 - monitoring current play state of REAPER instance
-- `media_player` for transport actions (rewind, stop, play, pause, fast-forward)
+- `media_player` for transport actions (rewind, stop, play, pause, fast-forward) and volume
 - enabling/disabling metronome
 - enabling/disabling repeat
 - starting and stopping recording
-- a service for running Reaper actions
+- a service for running REAPER actions
+
+## Sensors
+
+- `switch.metronome`
+- `switch.repeat`
+- `switch.record`
+- `switch.master_mute`
+- `media_player.reaper`
+- `sensor.number_of_tracks`
+- `sensor.time_signature`
+- `sensor.play_state`
 
 # Manual installation
 
@@ -32,19 +43,21 @@ This component is available on [HACS](https://hacs.xyz) default.
 
 ## Setup REAPER web interface
 
-1. Launch your Reaper DAW
+1. Launch your REAPER DAW
 1. Hit `Ctrl + P` or go to Options > Preferences
 1. Navigate to "Control/OSC/web" menu and click "Add"
 1. From the "Control surface mode" dropdown menu choose "Web browser interface"
 1. Set the web interface port or leave default `8080`
 1. Optionally set username:password
 1. Optionally set the default web interface
-1. Copy the Access URL and paste it in your browser - now your Reaper has a web interface.
+1. Copy the Access URL and paste it in your browser - now your REAPER has a web interface.
 1. Hit OK in both preference windows
 
 ## Setup Integration
 
-To configure integration in Home Assistant, go to **Configuration** >> **Integrations** >> **Add integration** >> **Reaper DAW** or use My Home Assistant link:
+Before starting the setup please ensure that your REAPER instance is running and its web interface is accessible from the web browser.
+
+To configure integration in Home Assistant, go to **Configuration** >> **Integrations** >> **Add integration** >> **REAPER DAW** or use My Home Assistant link:
 
 [![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=reaper)
 

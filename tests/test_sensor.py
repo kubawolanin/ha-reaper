@@ -50,6 +50,32 @@ async def test_sensor(hass, bypass_get_data):
     assert entry
     assert entry.unique_id == "192.168.0.5-number_of_tracks"
 
+    state = hass.states.get("sensor.play_state")
+
+    assert state
+    assert state.state == "stopped"
+    assert state.attributes.get("attribution") == ATTRIBUTION
+    assert state.attributes.get("icon") == "mdi:play-circle-outline"
+    assert state.attributes.get("device_class") == "reaper__play_state"
+
+    entry = registry.async_get("sensor.play_state")
+
+    assert entry
+    assert entry.unique_id == "192.168.0.5-play_state"
+
+    state = hass.states.get("sensor.time_signature")
+
+    assert state
+    assert state.state == "4/4"
+    assert state.attributes.get("attribution") == ATTRIBUTION
+    assert state.attributes.get("icon") == "mdi:timeline-clock-outline"
+    assert state.attributes.get("device_class") == "reaper__time_signature"
+
+    entry = registry.async_get("sensor.time_signature")
+
+    assert entry
+    assert entry.unique_id == "192.168.0.5-time_signature"
+
 
 async def test_state_update(hass, bypass_get_data):
     """Ensure the sensor state changes after updating the data."""

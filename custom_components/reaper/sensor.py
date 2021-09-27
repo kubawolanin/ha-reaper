@@ -21,8 +21,6 @@ from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from . import ReaperDataUpdateCoordinator
 from .const import (
-    ATTR_TREND,
-    ATTR_VALUE,
     ATTRIBUTION,
     DOMAIN,
     SENSORS,
@@ -82,8 +80,6 @@ class ReaperSensor(CoordinatorEntity, SensorEntity):
     @property
     def extra_state_attributes(self) -> dict[str, Any]:
         """Return the state attributes."""
-        # for item in (ATTR_TREND, ATTR_VALUE):
-        #     self._attrs[item] = getattr(self._sensor_data, item)
 
         return self._attrs
 
