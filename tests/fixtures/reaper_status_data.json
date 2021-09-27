@@ -1,0 +1,101 @@
+{
+    "tracks": [
+        {
+            "index": 0,
+            "name": "MASTER",
+            "flags": [],
+            "volume": "1.000000",
+            "pan": "0.000000",
+            "last_meter_peak": "-1500",
+            "last_meter_pos": "-1500",
+            "width_pan2": "1.000000",
+            "panmode": "0",
+            "sendcnt": "0",
+            "recvcnt": "0",
+            "hwoutcnt": "1",
+            "color": "0"
+        },
+        {
+            "index": 1,
+            "name": "Piano",
+            "flags": [
+                "record-armed"
+            ],
+            "volume": "1.000000",
+            "pan": "0.000000",
+            "last_meter_peak": "-510",
+            "last_meter_pos": "-510",
+            "width_pan2": "1.000000",
+            "panmode": "3",
+            "sendcnt": "0",
+            "recvcnt": "0",
+            "hwoutcnt": "0",
+            "color": "28657273"
+        },
+        {
+            "index": 2,
+            "name": "Guitar",
+            "flags": [],
+            "volume": "1.000000",
+            "pan": "0.000000",
+            "last_meter_peak": "-1500",
+            "last_meter_pos": "-1500",
+            "width_pan2": "1.000000",
+            "panmode": "3",
+            "sendcnt": "0",
+            "recvcnt": "0",
+            "hwoutcnt": "0",
+            "color": "33258448"
+        },
+        {
+            "index": 3,
+            "name": "Drums",
+            "flags": [],
+            "volume": "1.000000",
+            "pan": "0.000000",
+            "last_meter_peak": "-1500",
+            "last_meter_pos": "-1500",
+            "width_pan2": "1.000000",
+            "panmode": "3",
+            "sendcnt": "0",
+            "recvcnt": "0",
+            "hwoutcnt": "0",
+            "color": "29388878"
+        },
+        {
+            "index": 4,
+            "name": "Bass",
+            "flags": [
+                "selected"
+            ],
+            "volume": "1.000000",
+            "pan": "0.000000",
+            "last_meter_peak": "-1500",
+            "last_meter_pos": "-1500",
+            "width_pan2": "1.000000",
+            "panmode": "3",
+            "sendcnt": "0",
+            "recvcnt": "0",
+            "hwoutcnt": "0",
+            "color": "16826303"
+        }
+    ],
+    "repeat": true,
+    "metronome": true,
+    "beatpos": {
+        "playstate": "stopped",
+        "position_seconds": "10.000000000000000",
+        "full_beat_position": "20.000000000000000",
+        "measure_cnt": "5",
+        "beats_in_measure": "0.000000000010001",
+        "time_signature": "4/4"
+    },
+    "transport": {
+        "playstate": "stopped",
+        "position_seconds": "10.000000",
+        "repeat": true,
+        "position_string": "6.1.00",
+        "position_string_beats": "6.1.00"
+    },
+    "number_of_tracks": 4
+}

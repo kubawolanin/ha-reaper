@@ -2,8 +2,10 @@
   "name": "Reaper DAW",
   "homeassistant": "2021.9.0",
   "iot_class": "Local Polling",
-  "domains": ["sensor"],
+  "domains": [
+    "sensor"
+  ],
   "zip_release": true,
-  "filename": "reaper_daw.zip",
-  "country": "PL"
+  "filename": "reaper.zip",
+  "render_readme": true
 }

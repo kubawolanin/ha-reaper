@@ -1,0 +1,10 @@
+aiohttp_cors
+black
+flake8
+isort
+mypy
+pylint
+pytest==6.2.4
+pytest-cov
+pytest-homeassistant-custom-component
+python-reaperdaw

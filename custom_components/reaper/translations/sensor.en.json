@@ -1,0 +1,11 @@
+{
+    "state": {
+        "reaper__playstate": {
+            "stopped": "Stopped",
+            "playing": "Playing",
+            "paused": "Paused",
+            "recording": "Recording",
+            "recordpaused": "Recording paused"
+        }
+    }
+}

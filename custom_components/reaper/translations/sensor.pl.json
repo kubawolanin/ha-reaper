@@ -1,0 +1,11 @@
+{
+    "state": {
+        "reaper__playstate": {
+            "stopped": "Zatrzymano",
+            "playing": "Odtwarzanie",
+            "paused": "Pauza",
+            "recording": "Nagrywanie",
+            "recordpaused": "Nagrywanie wstrzymane"
+        }
+    }
+}

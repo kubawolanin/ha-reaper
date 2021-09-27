@@ -1,0 +1,28 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "user": {
+        "description": "Konfiguracja integracji REAPER DAW.",
+        "data": {
+          "hostname": "Host",
+          "port": "Port",
+          "username": "Nazwa użytkownika",
+          "password": "Hasło",
+          "update_interval": "Interwał aktualizacji stanu w sekundach"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Nie można połączyć się z interfejsem web REAPERa."
+    },
+    "abort": {
+      "already_configured": "Integracja REAPER jest już skonfigurowana dla tego hosta."
+    }
+  },
+  "system_health": {
+    "info": {
+      "can_reach_server": "Dostęp do serwera"
+    }
+  }
+}

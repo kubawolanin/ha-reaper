@@ -1,0 +1,28 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "user": {
+        "description": "Set up Reaper integration.",
+        "data": {
+          "hostname": "Host",
+          "port": "Port",
+          "username": "Username",
+          "password": "Password",
+          "update_interval": "State update interval in seconds"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to Reaper web."
+    },
+    "abort": {
+      "already_configured": "Reaper integration for this hostname is already configured."
+    }
+  },
+  "system_health": {
+    "info": {
+      "can_reach_server": "Reach server"
+    }
+  }
+}
