@@ -4,7 +4,6 @@ from __future__ import annotations
 import json
 import logging
 from typing import Any, cast
-from operator import attrgetter, itemgetter
 
 from homeassistant.components.sensor import (
     DOMAIN as PLATFORM,
@@ -68,7 +67,7 @@ class ReaperSensor(CoordinatorEntity, SensorEntity):
         self._attrs = {ATTR_ATTRIBUTION: ATTRIBUTION}
         _LOGGER.debug("Received data: %s", coordinator.data)
         _LOGGER.debug("Type: %s", type(coordinator.data))
-        status = coordinator.data
+        status = json.loads(coordinator.data)
         self._sensor_data = status.get(description.key)
         self.entity_description = description
 
@@ -86,5 +85,6 @@ class ReaperSensor(CoordinatorEntity, SensorEntity):
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
-        self._sensor_data = getattr(self.coordinator.data, self.entity_description.key)
+        status = json.loads(self.coordinator.data)
+        self._sensor_data = status.get(self.entity_description.key)
         self.async_write_ha_state()

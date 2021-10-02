@@ -19,6 +19,7 @@ from homeassistant.helpers.device_registry import async_get_registry
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from .const import (
+    ATTR_ID,
     CONF_HOSTNAME,
     CONF_PORT,
     CONF_USERNAME,
@@ -26,12 +27,13 @@ from .const import (
     CONF_UPDATE_INTERVAL,
     DEFAULT_PORT,
     DEFAULT_UPDATE_INTERVAL,
+    DEFAULT_ACTION_ID,
     DOMAIN,
 )
 
 _LOGGER = logging.getLogger(__name__)
 
-PLATFORMS: Final[list[str]] = ["sensor"]
+PLATFORMS: Final[list[str]] = ["sensor", "switch", "media_player"]
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
@@ -87,11 +89,15 @@ class ReaperDataUpdateCoordinator(DataUpdateCoordinator):
     ) -> None:
         """Initialize."""
         self.hostname = hostname
+        self.port = port
         self.update_interval = update_interval
         self.reaperdaw = Reaper(session, hostname, port, username, password)
 
         super().__init__(
-            hass, _LOGGER, name=DOMAIN, update_interval=timedelta(seconds=update_interval)
+            hass,
+            _LOGGER,
+            name=DOMAIN,
+            update_interval=timedelta(seconds=update_interval),
         )
 
     async def _async_update_data(self):
