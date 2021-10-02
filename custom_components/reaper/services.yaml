@@ -1,0 +1,93 @@
+# Describes the format for available Reaper services
+run_action:
+  name: Run action
+  description: Run any Action in REAPER. Valid action command IDs are numeric values (0-65535) or strings starting with underscore (_123456789abcdef) - these are REAPER plug-in registered command IDs (also used by ReaScripts and custom actions)
+  fields:
+    entity_id:
+      description: Name(s) of entities to modify the setting on.
+      example: "media_player.reaper_transport"
+      name: Entity
+      required: true
+      selector:
+        entity:
+          integration: reaper
+          domain: media_player
+    id:
+      name: Action command ID
+      description: Action command ID from REAPER's Actions window
+      required: true
+      example: "1007 or _a1b2c3 for custom actions"
+      selector:
+        text:
+play:
+  name: Play
+  fields:
+    entity_id:
+      description: Name(s) of entities to modify the setting on.
+      example: "media_player.reaper_transport"
+      name: Entity
+      required: true
+      selector:
+        entity:
+          integration: reaper
+          domain: media_player
+stop:
+  name: Stop
+  fields:
+    entity_id:
+      description: Name(s) of entities to modify the setting on.
+      example: "media_player.reaper_transport"
+      name: Entity
+      required: true
+      selector:
+        entity:
+          integration: reaper
+          domain: media_player
+pause:
+  name: Pause
+  fields:
+    entity_id:
+      description: Name(s) of entities to modify the setting on.
+      example: "media_player.reaper_transport"
+      name: Entity
+      required: true
+      selector:
+        entity:
+          integration: reaper
+          domain: media_player
+rewind:
+  name: Rewind
+  fields:
+    entity_id:
+      description: Name(s) of entities to modify the setting on.
+      example: "media_player.reaper_transport"
+      name: Entity
+      required: true
+      selector:
+        entity:
+          integration: reaper
+          domain: media_player
+fast_forward:
+  name: Fast forward
+  fields:
+    entity_id:
+      description: Name(s) of entities to modify the setting on.
+      example: "media_player.reaper_transport"
+      name: Entity
+      required: true
+      selector:
+        entity:
+          integration: reaper
+          domain: media_player
+record:
+  name: Record
+  fields:
+    entity_id:
+      description: Name(s) of entities to modify the setting on.
+      example: "media_player.reaper_transport"
+      name: Entity
+      required: true
+      selector:
+        entity:
+          integration: reaper
+          domain: media_player

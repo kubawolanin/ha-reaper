@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 # Home Assistant
-*.yaml
+# *.yaml
 *.log
 *.db
 .cloud
