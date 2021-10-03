@@ -25,7 +25,6 @@
 - `switch.metronome`
 - `switch.repeat`
 - `switch.record`
-- `switch.master_mute`
 - `media_player.reaper`
 - `sensor.number_of_tracks`
 - `sensor.time_signature`
