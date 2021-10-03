@@ -19,66 +19,6 @@ run_action:
       example: "1007 or _a1b2c3 for custom actions"
       selector:
         text:
-play:
-  name: Play
-  fields:
-    entity_id:
-      description: Name(s) of entities to modify the setting on.
-      example: "media_player.reaper_transport"
-      name: Entity
-      required: true
-      selector:
-        entity:
-          integration: reaper
-          domain: media_player
-stop:
-  name: Stop
-  fields:
-    entity_id:
-      description: Name(s) of entities to modify the setting on.
-      example: "media_player.reaper_transport"
-      name: Entity
-      required: true
-      selector:
-        entity:
-          integration: reaper
-          domain: media_player
-pause:
-  name: Pause
-  fields:
-    entity_id:
-      description: Name(s) of entities to modify the setting on.
-      example: "media_player.reaper_transport"
-      name: Entity
-      required: true
-      selector:
-        entity:
-          integration: reaper
-          domain: media_player
-rewind:
-  name: Rewind
-  fields:
-    entity_id:
-      description: Name(s) of entities to modify the setting on.
-      example: "media_player.reaper_transport"
-      name: Entity
-      required: true
-      selector:
-        entity:
-          integration: reaper
-          domain: media_player
-fast_forward:
-  name: Fast forward
-  fields:
-    entity_id:
-      description: Name(s) of entities to modify the setting on.
-      example: "media_player.reaper_transport"
-      name: Entity
-      required: true
-      selector:
-        entity:
-          integration: reaper
-          domain: media_player
 record:
   name: Record
   fields:

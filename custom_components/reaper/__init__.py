@@ -59,7 +59,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     hass.data.setdefault(DOMAIN, {})
     hass.data[DOMAIN][entry.entry_id] = coordinator
 
-    hass.config_entries.async_setup_platforms(entry, PLATFORMS)
+    for component in PLATFORMS:
+        hass.async_create_task(
+            hass.config_entries.async_forward_entry_setup(entry, component)
+        )
 
     return True
 
@@ -104,6 +107,7 @@ class ReaperDataUpdateCoordinator(DataUpdateCoordinator):
         """Update data via library."""
         try:
             with async_timeout.timeout(10):
-                return await self.reaperdaw.getStatus()
+                status = await self.reaperdaw.getStatus()
+                return status
         except (ReaperError, ClientConnectorError) as error:
             raise UpdateFailed(error) from error

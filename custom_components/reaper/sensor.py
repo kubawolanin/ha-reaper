@@ -65,8 +65,6 @@ class ReaperSensor(CoordinatorEntity, SensorEntity):
         }
         self._attr_unique_id = f"{coordinator.hostname}-{description.key}"
         self._attrs = {ATTR_ATTRIBUTION: ATTRIBUTION}
-        _LOGGER.debug("Received data: %s", coordinator.data)
-        _LOGGER.debug("Type: %s", type(coordinator.data))
         status = json.loads(coordinator.data)
         self._sensor_data = status.get(description.key)
         self.entity_description = description
@@ -87,4 +85,7 @@ class ReaperSensor(CoordinatorEntity, SensorEntity):
         """Handle updated data from the coordinator."""
         status = json.loads(self.coordinator.data)
         self._sensor_data = status.get(self.entity_description.key)
+
+        if self.entity_description.key == "number_of_tracks":
+            self._attrs["tracks"] = status.get("tracks")
         self.async_write_ha_state()

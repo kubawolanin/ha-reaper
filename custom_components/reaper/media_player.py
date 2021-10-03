@@ -3,6 +3,9 @@ import json
 import logging
 
 import voluptuous as vol
+from homeassistant.core import HomeAssistant
+from homeassistant.config_entries import ConfigEntry
+from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.components.media_player.const import (
     ATTR_MEDIA_VOLUME_LEVEL,
     MEDIA_TYPE_MUSIC,
@@ -20,16 +23,17 @@ from homeassistant.components.media_player import (
 from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers import entity_platform
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
-
+from homeassistant.const import (
+    CONF_NAME,
+    STATE_IDLE,
+    STATE_OFF,
+    STATE_PAUSED,
+    STATE_PLAYING,
+)
 from . import ReaperDataUpdateCoordinator
 from .const import (
     ATTR_ID,
     DOMAIN,
-    SERVICE_PLAY,
-    SERVICE_STOP,
-    SERVICE_PAUSE,
-    SERVICE_REWIND,
-    SERVICE_FAST_FORWARD,
     SERVICE_RECORD,
     SERVICE_RUN_ACTION,
 )
@@ -37,7 +41,7 @@ from .const import (
 SUPPORT_REAPER = (
     SUPPORT_PLAY
     | SUPPORT_VOLUME_SET
-    | SUPPORT_PAUSE
+    # | SUPPORT_PAUSE
     | SUPPORT_PREVIOUS_TRACK
     | SUPPORT_NEXT_TRACK
     | SUPPORT_STOP
@@ -47,40 +51,22 @@ SUPPORT_REAPER = (
 _LOGGER = logging.getLogger(__name__)
 
 
-async def async_setup_entry(hass, config_entry, async_add_entities):
+PLAYBACK_DICT = {
+    "stopped": STATE_IDLE,
+    "playing": STATE_PLAYING,
+    "paused": STATE_PAUSED,
+    "recording": STATE_PLAYING,
+    "recordpaused": STATE_PAUSED,
+}
+
+
+async def async_setup_entry(
+    hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback
+):
     """Set up the Reaper media player."""
-    coordinator: ReaperDataUpdateCoordinator = hass.data[DOMAIN][config_entry.entry_id]
+    print("MEDIA PLAYER")
+    coordinator: ReaperDataUpdateCoordinator = hass.data[DOMAIN][entry.entry_id]
     platform = entity_platform.current_platform.get()
-
-    platform.async_register_entity_service(
-        SERVICE_PLAY,
-        {},
-        "async_reaper_play",
-    )
-
-    platform.async_register_entity_service(
-        SERVICE_STOP,
-        {},
-        "async_reaper_stop",
-    )
-
-    platform.async_register_entity_service(
-        SERVICE_PAUSE,
-        {},
-        "async_reaper_pause",
-    )
-
-    platform.async_register_entity_service(
-        SERVICE_REWIND,
-        {},
-        "async_reaper_rewind",
-    )
-
-    platform.async_register_entity_service(
-        SERVICE_FAST_FORWARD,
-        {},
-        "async_reaper_fast_forward",
-    )
 
     platform.async_register_entity_service(
         SERVICE_RECORD,
@@ -96,18 +82,10 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
         "async_reaper_run_action",
     )
 
-    platform.async_register_entity_service(
-        SERVICE_VOLUME_SET,
-        {
-            vol.Required(ATTR_MEDIA_VOLUME_LEVEL): cv.small_float,
-        },
-        "async_reaper_set_volume_level",
-    )
-
     async_add_entities([ReaperMediaPlayer(coordinator)], False)
 
 
-class ReaperMediaPlayer(MediaPlayerEntity, CoordinatorEntity):
+class ReaperMediaPlayer(CoordinatorEntity, MediaPlayerEntity):
     """Representation of a Reaper media player."""
 
     coordinator: ReaperDataUpdateCoordinator
@@ -115,24 +93,22 @@ class ReaperMediaPlayer(MediaPlayerEntity, CoordinatorEntity):
     def __init__(self, coordinator: ReaperDataUpdateCoordinator):
         """Initialize a Reaper media player."""
         super().__init__(coordinator)
-        self._name = "Reaper Transport"
+        self._name = f"{coordinator.hostname} Reaper Transport"
+
         self.coordinator = coordinator
         self._unique_id = f"{coordinator.hostname}-mediaplayer"
-        self.status = json.loads(self.coordinator.data)
-        self._is_on = self.status.get("play_state")
-        self._play_state = self.status.get("play_state")
+        self.status = json.loads(coordinator.data)
+        self._state = None
 
-    # def update(self):
-    #     """Update the States"""
-    #     if self._play_state:
-    #         if self._play_state == "playing":
-    #             self._state = STATE_PLAYING
-    #         else:
-    #             self._state = STATE_PAUSED
+    async def async_update(self):
+        """Update Reaper entity."""
+        await self.coordinator.async_request_refresh()
+        self._state = PLAYBACK_DICT[json.loads(self.coordinator.data).get("play_state")]
+        self.status = json.loads(self.coordinator.data)
 
     @property
     def should_poll(self):
-        return False
+        return True
 
     @property
     def name(self):
@@ -140,14 +116,19 @@ class ReaperMediaPlayer(MediaPlayerEntity, CoordinatorEntity):
         return self._name
 
     @property
+    def state(self):
+        """Return the state of the device."""
+        return self._state
+
+    @property
     def media_content_type(self):
         """Content type of current playing media."""
         return MEDIA_TYPE_MUSIC
 
-    @property
-    def is_on(self):
-        """Return True if device is on."""
-        return self._is_on
+    # @property
+    # def is_on(self):
+    #     """Return True if device is on."""
+    #     return self._is_on
 
     @property
     def supported_features(self):
@@ -176,9 +157,14 @@ class ReaperMediaPlayer(MediaPlayerEntity, CoordinatorEntity):
         """Turn off."""
         await self.coordinator.async_refresh()
 
-    async def async_play_media(self, **kwargs):
+    async def async_media_play(self):
         """Play."""
         await self.coordinator.reaperdaw.play()
+        await self.coordinator.async_refresh()
+
+    async def async_media_pause(self):
+        """Play."""
+        await self.coordinator.reaperdaw.pause()
         await self.coordinator.async_refresh()
 
     async def async_media_stop(self):
@@ -200,31 +186,6 @@ class ReaperMediaPlayer(MediaPlayerEntity, CoordinatorEntity):
         """Set volume level, range 0..1."""
         await self.async_reaper_set_volume_level(volume)
 
-    async def async_reaper_play(self):
-        """Play a piece of audio in Reaper."""
-        await self.coordinator.reaperdaw.play()
-        await self.coordinator.async_refresh()
-
-    async def async_reaper_stop(self):
-        """Stop a piece of audio in Reaper."""
-        await self.coordinator.reaperdaw.stop()
-        await self.coordinator.async_refresh()
-
-    async def async_reaper_pause(self):
-        """Pause a piece of audio in Reaper."""
-        await self.coordinator.reaperdaw.pause()
-        await self.coordinator.async_refresh()
-
-    async def async_reaper_rewind(self):
-        """Rewind a piece of audio in Reaper."""
-        await self.coordinator.reaperdaw.rewind()
-        await self.coordinator.async_refresh()
-
-    async def async_reaper_fast_forward(self):
-        """Fast_forward a piece of audio in Reaper."""
-        await self.coordinator.reaperdaw.fastForward()
-        await self.coordinator.async_refresh()
-
     async def async_reaper_record(self):
         """Record a piece of audio in Reaper."""
         await self.coordinator.reaperdaw.record()
@@ -244,7 +205,3 @@ class ReaperMediaPlayer(MediaPlayerEntity, CoordinatorEntity):
         self.async_on_remove(
             self.coordinator.async_add_listener(self.async_write_ha_state)
         )
-
-    async def async_update(self):
-        """Update Reaper entity."""
-        await self.coordinator.async_request_refresh()

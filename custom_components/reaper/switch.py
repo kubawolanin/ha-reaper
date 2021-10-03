@@ -2,8 +2,10 @@
 import json
 import logging
 from typing import Any, cast
-
+from homeassistant.core import HomeAssistant, callback
+from homeassistant.config_entries import ConfigEntry
 from homeassistant.components.switch import SwitchEntity
+from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from . import ReaperDataUpdateCoordinator
@@ -12,7 +14,9 @@ from .const import DOMAIN
 _LOGGER = logging.getLogger(__name__)
 
 
-async def async_setup_entry(hass, entry, async_add_entities):
+async def async_setup_entry(
+    hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback
+):
     """Set up the Reaper switch."""
     coordinator: ReaperDataUpdateCoordinator = hass.data[DOMAIN][entry.entry_id]
 
@@ -30,6 +34,7 @@ class ReaperSwitch(CoordinatorEntity, SwitchEntity):
         """Initialize the switch."""
         super().__init__(coordinator)
 
+        self.coordinator = coordinator
         self.status = json.loads(coordinator.data)
         self.hass = hass
         self._name = ""
@@ -68,8 +73,8 @@ class ReaperSwitch(CoordinatorEntity, SwitchEntity):
 
     async def async_update(self):
         """Update Reaper entity."""
-        self.status = json.loads(self.coordinator.data)
         await self.coordinator.async_request_refresh()
+        self.status = json.loads(self.coordinator.data)
 
 
 class ReaperRecordingSwitch(ReaperSwitch):
@@ -85,19 +90,18 @@ class ReaperRecordingSwitch(ReaperSwitch):
     @property
     def is_on(self):
         """Return if switch is on."""
-        _LOGGER.debug(self.status.get("play_state"))
-        if self.status:
-            return self.status.get("play_state") == "recording"
+        if self.coordinator.data:
+            return json.loads(self.coordinator.data).get("play_state") == "recording"
 
     async def async_turn_on(self, **kwargs):
         """Turn on the recording."""
         await self.coordinator.reaperdaw.record()
-        self.async_write_ha_state()
+        await self.coordinator.async_refresh()
 
     async def async_turn_off(self, **kwargs):
         """Turn off the recording."""
         await self.coordinator.reaperdaw.stop()
-        self.async_write_ha_state()
+        await self.coordinator.async_refresh()
 
 
 class ReaperMetronomeSwitch(ReaperSwitch):
@@ -113,20 +117,18 @@ class ReaperMetronomeSwitch(ReaperSwitch):
     @property
     def is_on(self):
         """Return if metronome is on."""
-        _LOGGER.debug(self.status.get("metronome"))
-        return self.status.get("metronome") == True
+        if self.coordinator.data:
+            return json.loads(self.coordinator.data).get("metronome") == True
 
     async def async_turn_on(self, **kwargs):
         """Turn on metronome."""
         await self.coordinator.reaperdaw.enableMetronome()
-        self.async_write_ha_state()
-        _LOGGER.debug(self.status.get("metronome"))
+        await self.coordinator.async_refresh()
 
     async def async_turn_off(self, **kwargs):
         """Turn off metronome."""
         await self.coordinator.reaperdaw.disableMetronome()
-        self.async_write_ha_state()
-        _LOGGER.debug(self.status.get("metronome"))
+        await self.coordinator.async_refresh()
 
 
 class ReaperRepeatSwitch(ReaperSwitch):
@@ -142,15 +144,10 @@ class ReaperRepeatSwitch(ReaperSwitch):
     @property
     def is_on(self):
         """Return if repeat is on."""
-        _LOGGER.debug(self.status.get("repeat"))
-        return self.status.get("repeat") == True
+        if self.coordinator.data:
+            return json.loads(self.coordinator.data).get("repeat") == True
 
-    async def async_turn_on(self, **kwargs):
+    async def async_toggle(self, **kwargs):
         """Turn on repeat."""
         await self.coordinator.reaperdaw.toggleRepeat()
-        self.async_write_ha_state()
-
-    async def async_turn_off(self, **kwargs):
-        """Turn off repeat."""
-        await self.coordinator.reaperdaw.toggleRepeat()
-        self.async_write_ha_state()
+        await self.coordinator.async_refresh()
