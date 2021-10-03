@@ -21,6 +21,7 @@ run_action:
         text:
 record:
   name: Record
+  description: Start recording
   fields:
     entity_id:
       description: Name(s) of entities to modify the setting on.
