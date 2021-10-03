@@ -13,7 +13,7 @@
             "sendcnt": "0",
             "recvcnt": "0",
             "hwoutcnt": "1",
-            "color": "0"
+            "color": "#000000"
         },
         {
             "index": 1,
@@ -30,7 +30,7 @@
             "sendcnt": "0",
             "recvcnt": "0",
             "hwoutcnt": "0",
-            "color": "28657273"
+            "color": "#657273"
         },
         {
             "index": 2,
@@ -45,7 +45,7 @@
             "sendcnt": "0",
             "recvcnt": "0",
             "hwoutcnt": "0",
-            "color": "33258448"
+            "color": "#258448"
         },
         {
             "index": 3,
@@ -60,7 +60,7 @@
             "sendcnt": "0",
             "recvcnt": "0",
             "hwoutcnt": "0",
-            "color": "29388878"
+            "color": "#388878"
         },
         {
             "index": 4,
@@ -77,7 +77,7 @@
             "sendcnt": "0",
             "recvcnt": "0",
             "hwoutcnt": "0",
-            "color": "16826303"
+            "color": "#826303"
         }
     ],
     "repeat": true,

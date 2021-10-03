@@ -2,10 +2,8 @@
 from __future__ import annotations
 
 from datetime import timedelta
-from functools import update_wrapper
-import json
 import logging
-from typing import Final
+from typing import Any, Final
 
 from aiohttp import ClientSession
 from aiohttp.client_exceptions import ClientConnectorError
@@ -15,17 +13,14 @@ from reaperdaw import Reaper, ReaperError
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
-from homeassistant.helpers.device_registry import async_get_registry
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from .const import (
-    ATTR_ID,
     CONF_HOSTNAME,
     CONF_PASSWORD,
     CONF_PORT,
     CONF_UPDATE_INTERVAL,
     CONF_USERNAME,
-    DEFAULT_ACTION_ID,
     DEFAULT_PORT,
     DEFAULT_UPDATE_INTERVAL,
     DOMAIN,
@@ -103,7 +98,7 @@ class ReaperDataUpdateCoordinator(DataUpdateCoordinator):
             update_interval=timedelta(seconds=update_interval),
         )
 
-    async def _async_update_data(self):
+    async def _async_update_data(self) -> str | Any:
         """Update data via library."""
         try:
             with async_timeout.timeout(10):

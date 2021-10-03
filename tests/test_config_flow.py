@@ -49,23 +49,29 @@ async def test_create_entry(hass, bypass_get_data):
 
 async def test_duplicate_error(hass, bypass_get_data):
     """Test that errors are shown when duplicates are added."""
-    entry = MockConfigEntry(domain=DOMAIN, unique_id="192.168.0.5", data={
-        CONF_HOSTNAME: "192.168.0.5",
-        CONF_PORT: 8080,
-        CONF_USERNAME: "admin",
-        CONF_PASSWORD: "pass",
-        CONF_UPDATE_INTERVAL: 60,
-    })
+    entry = MockConfigEntry(
+        domain=DOMAIN,
+        unique_id="192.168.0.5",
+        data={
+            CONF_HOSTNAME: "192.168.0.5",
+            CONF_PORT: 8080,
+            CONF_USERNAME: "admin",
+            CONF_PASSWORD: "pass",
+            CONF_UPDATE_INTERVAL: 60,
+        },
+    )
     entry.add_to_hass(hass)
 
     result = await hass.config_entries.flow.async_init(
-        DOMAIN, context={"source": SOURCE_USER}, data={
+        DOMAIN,
+        context={"source": SOURCE_USER},
+        data={
             CONF_HOSTNAME: "192.168.0.5",
             CONF_PORT: 9999,
             CONF_USERNAME: "admin",
             CONF_PASSWORD: "pass",
             CONF_UPDATE_INTERVAL: 60,
-        }
+        },
     )
 
     assert result["type"] == "abort"

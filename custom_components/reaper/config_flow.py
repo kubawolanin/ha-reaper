@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import asyncio
-import json
 from typing import Any
 
 from aiohttp.client_exceptions import ClientConnectorError
@@ -69,12 +68,16 @@ class ReaperFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):  # type: igno
 
         return self.async_show_form(
             step_id="user",
-            data_schema=vol.Schema({
-                vol.Required(CONF_HOSTNAME): str,
-                vol.Required(CONF_PORT, default=DEFAULT_PORT): int,
-                vol.Optional(CONF_USERNAME, default=""): str,
-                vol.Optional(CONF_PASSWORD, default=""): str,
-                vol.Required(CONF_UPDATE_INTERVAL, default=DEFAULT_UPDATE_INTERVAL): int,
-            }),
+            data_schema=vol.Schema(
+                {
+                    vol.Required(CONF_HOSTNAME): str,
+                    vol.Required(CONF_PORT, default=DEFAULT_PORT): int,
+                    vol.Optional(CONF_USERNAME, default=""): str,
+                    vol.Optional(CONF_PASSWORD, default=""): str,
+                    vol.Required(
+                        CONF_UPDATE_INTERVAL, default=DEFAULT_UPDATE_INTERVAL
+                    ): int,
+                }
+            ),
             errors=errors,
         )

@@ -1,5 +1,4 @@
 """Global fixtures for Reaper integration."""
-import json
 from unittest.mock import patch
 
 import pytest
@@ -13,7 +12,7 @@ def bypass_get_data_fixture():
     """Skip calls to get data from API."""
     with patch(
         "custom_components.reaper.Reaper.getStatus",
-        return_value=json.loads(load_fixture("reaper_status_data.json")),
+        return_value=load_fixture("reaper_status_data.json"),
     ):
         yield
 

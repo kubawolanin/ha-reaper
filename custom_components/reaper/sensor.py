@@ -5,15 +5,10 @@ import json
 import logging
 from typing import Any, cast
 
-from homeassistant.components.sensor import (
-    DOMAIN as PLATFORM,
-    SensorEntity,
-    SensorEntityDescription,
-)
+from homeassistant.components.sensor import SensorEntity, SensorEntityDescription
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import ATTR_ATTRIBUTION
 from homeassistant.core import HomeAssistant, callback
-from homeassistant.helpers import entity_registry
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.typing import StateType
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
