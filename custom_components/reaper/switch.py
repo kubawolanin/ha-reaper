@@ -97,6 +97,7 @@ class ReaperRecordingSwitch(ReaperSwitch):
         """Return if switch is on."""
         if self.coordinator.data:
             return json.loads(self.coordinator.data).get("play_state") == "recording"
+        return None
 
     async def async_turn_on(self) -> None:
         """Turn on the recording."""
@@ -126,6 +127,7 @@ class ReaperMetronomeSwitch(ReaperSwitch):
         """Return if metronome is on."""
         if self.coordinator.data is not None:
             return json.loads(self.coordinator.data).get("metronome")
+        return None
 
     async def async_turn_on(self) -> None:
         """Turn on metronome."""
@@ -155,6 +157,7 @@ class ReaperRepeatSwitch(ReaperSwitch):
         """Return if repeat is on."""
         if self.coordinator.data is not None:
             return json.loads(self.coordinator.data).get("repeat")
+        return None
 
     async def async_toggle(self) -> None:
         """Turn on repeat."""

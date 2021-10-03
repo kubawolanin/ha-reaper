@@ -172,9 +172,9 @@ class ReaperMediaPlayer(CoordinatorEntity, MediaPlayerEntity):
         await self.coordinator.reaperdaw.record()
         await self.coordinator.async_refresh()
 
-    async def async_reaper_run_action(self, id: str) -> None:
+    async def async_reaper_run_action(self, action_id: str) -> None:
         """Set reaper configuration actionId."""
-        await self.coordinator.reaperdaw.sendCommand(id)
+        await self.coordinator.reaperdaw.sendCommand(action_id)
         await self.coordinator.async_refresh()
 
     async def async_reaper_set_volume_level(self, volume_level: str) -> None:

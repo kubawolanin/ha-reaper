@@ -12,7 +12,7 @@ run_action:
         entity:
           integration: reaper
           domain: media_player
-    id:
+    action_id:
       name: Action command ID
       description: Action command ID from REAPER's Actions window
       required: true

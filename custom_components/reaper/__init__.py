@@ -75,7 +75,7 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 class ReaperDataUpdateCoordinator(DataUpdateCoordinator):
     """Class to manage fetching Reaper data API."""
 
-    def __init__(
+    def __init__(  # pylint: disable=R0913
         self,
         hass: HomeAssistant,
         session: ClientSession,

@@ -6,7 +6,7 @@ from typing import Final
 from homeassistant.components.sensor import SensorEntityDescription
 
 ATTRIBUTION: Final = "Data provided by Cockos Inc REAPER web interface."
-ATTR_ID = "id"
+ATTR_ID = "action_id"
 
 CONF_HOSTNAME: Final = "hostname"
 CONF_PORT: Final = "port"
