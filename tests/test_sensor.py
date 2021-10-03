@@ -10,12 +10,12 @@ from pytest_homeassistant_custom_component.common import (
 )
 
 from custom_components.reaper.const import (
+    ATTRIBUTION,
     CONF_HOSTNAME,
+    CONF_PASSWORD,
     CONF_PORT,
     CONF_UPDATE_INTERVAL,
     CONF_USERNAME,
-    CONF_PASSWORD,
-    ATTRIBUTION,
     DOMAIN,
 )
 from homeassistant.helpers import entity_registry as er

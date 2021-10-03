@@ -1,6 +1,8 @@
 """Constants for Reaper integration."""
 from __future__ import annotations
+
 from typing import Final
+
 from homeassistant.components.sensor import SensorEntityDescription
 
 ATTRIBUTION: Final = "Data provided by Cockos Inc REAPER web interface."

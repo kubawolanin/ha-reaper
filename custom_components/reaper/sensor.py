@@ -19,11 +19,7 @@ from homeassistant.helpers.typing import StateType
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from . import ReaperDataUpdateCoordinator
-from .const import (
-    ATTRIBUTION,
-    DOMAIN,
-    SENSORS,
-)
+from .const import ATTRIBUTION, DOMAIN, SENSORS
 
 PARALLEL_UPDATES = 1
 

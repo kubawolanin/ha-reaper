@@ -1,16 +1,16 @@
 """The Reaper component."""
 from __future__ import annotations
-from functools import update_wrapper
 
+from datetime import timedelta
+from functools import update_wrapper
 import json
 import logging
 from typing import Final
-from datetime import timedelta
 
 from aiohttp import ClientSession
 from aiohttp.client_exceptions import ClientConnectorError
 import async_timeout
-from reaperdaw import ReaperError, Reaper
+from reaperdaw import Reaper, ReaperError
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
@@ -21,13 +21,13 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, Upda
 from .const import (
     ATTR_ID,
     CONF_HOSTNAME,
-    CONF_PORT,
-    CONF_USERNAME,
     CONF_PASSWORD,
+    CONF_PORT,
     CONF_UPDATE_INTERVAL,
+    CONF_USERNAME,
+    DEFAULT_ACTION_ID,
     DEFAULT_PORT,
     DEFAULT_UPDATE_INTERVAL,
-    DEFAULT_ACTION_ID,
     DOMAIN,
 )
 

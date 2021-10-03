@@ -5,10 +5,10 @@ from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 from custom_components.reaper.const import (
     CONF_HOSTNAME,
+    CONF_PASSWORD,
     CONF_PORT,
     CONF_UPDATE_INTERVAL,
     CONF_USERNAME,
-    CONF_PASSWORD,
     DOMAIN,
 )
 from homeassistant.config_entries import SOURCE_USER

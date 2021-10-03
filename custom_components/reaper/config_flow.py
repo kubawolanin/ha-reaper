@@ -1,14 +1,14 @@
 """Adds config flow for Reaper."""
 from __future__ import annotations
 
-import json
 import asyncio
+import json
 from typing import Any
 
 from aiohttp.client_exceptions import ClientConnectorError
 import async_timeout
+from reaperdaw import Reaper, ReaperError
 import voluptuous as vol
-from reaperdaw import ReaperError, Reaper
 
 from homeassistant import config_entries
 from homeassistant.data_entry_flow import FlowResult
@@ -16,11 +16,11 @@ from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
 from .const import (
     CONF_HOSTNAME,
-    CONF_PORT,
-    CONF_USERNAME,
     CONF_PASSWORD,
-    DEFAULT_PORT,
+    CONF_PORT,
     CONF_UPDATE_INTERVAL,
+    CONF_USERNAME,
+    DEFAULT_PORT,
     DEFAULT_UPDATE_INTERVAL,
     DOMAIN,
 )

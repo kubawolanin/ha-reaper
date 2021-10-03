@@ -3,26 +3,19 @@ import json
 import logging
 
 import voluptuous as vol
-from homeassistant.core import HomeAssistant
-from homeassistant.config_entries import ConfigEntry
-from homeassistant.helpers.entity_platform import AddEntitiesCallback
+
+from homeassistant.components.media_player import SERVICE_VOLUME_SET, MediaPlayerEntity
 from homeassistant.components.media_player.const import (
     ATTR_MEDIA_VOLUME_LEVEL,
     MEDIA_TYPE_MUSIC,
-    SUPPORT_PLAY,
-    SUPPORT_PAUSE,
-    SUPPORT_PREVIOUS_TRACK,
     SUPPORT_NEXT_TRACK,
+    SUPPORT_PAUSE,
+    SUPPORT_PLAY,
+    SUPPORT_PREVIOUS_TRACK,
     SUPPORT_STOP,
     SUPPORT_VOLUME_SET,
 )
-from homeassistant.components.media_player import (
-    MediaPlayerEntity,
-    SERVICE_VOLUME_SET,
-)
-from homeassistant.helpers import config_validation as cv
-from homeassistant.helpers import entity_platform
-from homeassistant.helpers.update_coordinator import CoordinatorEntity
+from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import (
     CONF_NAME,
     STATE_IDLE,
@@ -30,13 +23,13 @@ from homeassistant.const import (
     STATE_PAUSED,
     STATE_PLAYING,
 )
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers import config_validation as cv, entity_platform
+from homeassistant.helpers.entity_platform import AddEntitiesCallback
+from homeassistant.helpers.update_coordinator import CoordinatorEntity
+
 from . import ReaperDataUpdateCoordinator
-from .const import (
-    ATTR_ID,
-    DOMAIN,
-    SERVICE_RECORD,
-    SERVICE_RUN_ACTION,
-)
+from .const import ATTR_ID, DOMAIN, SERVICE_RECORD, SERVICE_RUN_ACTION
 
 SUPPORT_REAPER = (
     SUPPORT_PLAY
