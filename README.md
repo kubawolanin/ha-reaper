@@ -22,10 +22,6 @@
 
 ![](preview.png)
 
-![](preview_2.png)
-
-
-
 ## Sensors
 
 - `switch.metronome`
