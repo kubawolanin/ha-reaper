@@ -42,9 +42,6 @@ SENSORS: Final[tuple[SensorEntityDescription, ...]] = (
 )
 
 SERVICE_RUN_ACTION = "run_action"
-SERVICE_PLAY = "play"
-SERVICE_STOP = "stop"
-SERVICE_PAUSE = "pause"
-SERVICE_REWIND = "rewind"
-SERVICE_FAST_FORWARD = "fast_forward"
 SERVICE_RECORD = "record"
+SERVICE_UNDO = "undo"
+SERVICE_REDO = "redo"

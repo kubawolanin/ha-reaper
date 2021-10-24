@@ -156,10 +156,15 @@ class ReaperRepeatSwitch(ReaperSwitch):
     def is_on(self) -> Any:
         """Return if repeat is on."""
         if self.coordinator.data is not None:
-            return json.loads(self.coordinator.data).get("repeat")
+            return json.loads(self.coordinator.data).get("transport").get("repeat")
         return None
 
-    async def async_toggle(self) -> None:
+    async def async_turn_on(self) -> None:
         """Turn on repeat."""
-        await self.coordinator.reaperdaw.toggleRepeat()
+        await self.coordinator.reaperdaw.enableRepeat()
+        await self.coordinator.async_refresh()
+
+    async def async_turn_off(self) -> None:
+        """Turn off repeat."""
+        await self.coordinator.reaperdaw.disableRepeat()
         await self.coordinator.async_refresh()

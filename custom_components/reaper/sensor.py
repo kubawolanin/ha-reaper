@@ -77,6 +77,4 @@ class ReaperSensor(CoordinatorEntity, SensorEntity):
         status = json.loads(self.coordinator.data)
         self._sensor_data = status.get(self.entity_description.key)
 
-        if self.entity_description.key == "number_of_tracks":
-            self._attrs["tracks"] = status.get("tracks")
         self.async_write_ha_state()

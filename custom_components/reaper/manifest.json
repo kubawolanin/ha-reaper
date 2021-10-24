@@ -2,11 +2,11 @@
   "domain": "reaper",
   "name": "Reaper DAW",
   "config_flow": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "documentation": "https://github.com/kubawolanin/ha-reaper",
   "issue_tracker": "https://github.com/kubawolanin/ha-reaper/issues",
   "requirements": [
-    "python-reaperdaw==0.0.3"
+    "python-reaperdaw==0.0.4"
   ],
   "codeowners": [
     "@kubawolanin"

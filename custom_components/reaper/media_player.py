@@ -23,12 +23,18 @@ from homeassistant.helpers.typing import StateType
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from . import ReaperDataUpdateCoordinator
-from .const import ATTR_ID, DOMAIN, SERVICE_RECORD, SERVICE_RUN_ACTION
+from .const import (
+    ATTR_ID,
+    DOMAIN,
+    SERVICE_RECORD,
+    SERVICE_REDO,
+    SERVICE_RUN_ACTION,
+    SERVICE_UNDO,
+)
 
 SUPPORT_REAPER = (
     SUPPORT_PLAY
     | SUPPORT_VOLUME_SET
-    # | SUPPORT_PAUSE
     | SUPPORT_PREVIOUS_TRACK
     | SUPPORT_NEXT_TRACK
     | SUPPORT_STOP
@@ -58,6 +64,18 @@ async def async_setup_entry(
         SERVICE_RECORD,
         {},
         "async_reaper_record",
+    )
+
+    platform.async_register_entity_service(
+        SERVICE_UNDO,
+        {},
+        "async_reaper_undo",
+    )
+
+    platform.async_register_entity_service(
+        SERVICE_REDO,
+        {},
+        "async_reaper_redo",
     )
 
     platform.async_register_entity_service(
@@ -177,9 +195,20 @@ class ReaperMediaPlayer(CoordinatorEntity, MediaPlayerEntity):
         await self.coordinator.reaperdaw.sendCommand(action_id)
         await self.coordinator.async_refresh()
 
+    async def async_reaper_undo(self) -> None:
+        """Undo action in Reaper."""
+        await self.coordinator.reaperdaw.sendCommand("40029")
+        await self.coordinator.async_refresh()
+
+    async def async_reaper_redo(self) -> None:
+        """Redo action in Reaper."""
+        await self.coordinator.reaperdaw.sendCommand("40030")
+        await self.coordinator.async_refresh()
+
     async def async_reaper_set_volume_level(self, volume_level: str) -> None:
         """Set volume level for a stream, range 0..1."""
-        await self.coordinator.reaperdaw.setMasterVolume(int(volume_level))
+        volume = float(volume_level)
+        await self.coordinator.reaperdaw.setMasterVolume(volume)
 
     async def async_added_to_hass(self) -> None:
         """Connect to dispatcher listening for entity data notifications."""

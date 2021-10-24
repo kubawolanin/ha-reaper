@@ -32,3 +32,29 @@ record:
         entity:
           integration: reaper
           domain: media_player
+undo:
+  name: Undo
+  description: Undo action
+  fields:
+    entity_id:
+      description: Name(s) of entities to modify the setting on.
+      example: "media_player.reaper_transport"
+      name: Entity
+      required: true
+      selector:
+        entity:
+          integration: reaper
+          domain: media_player
+redo:
+  name: Redo
+  description: Redo action
+  fields:
+    entity_id:
+      description: Name(s) of entities to modify the setting on.
+      example: "media_player.reaper_transport"
+      name: Entity
+      required: true
+      selector:
+        entity:
+          integration: reaper
+          domain: media_player

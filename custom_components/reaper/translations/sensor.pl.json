@@ -1,6 +1,6 @@
 {
     "state": {
-        "reaper__playstate": {
+        "reaper__play_state": {
             "stopped": "Zatrzymano",
             "playing": "Odtwarzanie",
             "paused": "Pauza",

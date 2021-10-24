@@ -18,7 +18,13 @@
 - enabling/disabling metronome
 - enabling/disabling repeat
 - starting and stopping recording
-- a service for running REAPER actions
+- a service for running REAPER actions, start recording, undo and redo
+
+![](preview.png)
+
+![](preview_2.png)
+
+
 
 ## Sensors
 

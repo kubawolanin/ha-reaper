@@ -134,5 +134,4 @@ dmypy.json
 *.db
 .cloud
 .storage
-.vscode
 .HA_VERSION
