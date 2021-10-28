@@ -61,7 +61,7 @@ class ReaperSwitch(CoordinatorEntity, SwitchEntity):
             "identifiers": {(DOMAIN, self.coordinator.hostname)},
             "name": self.coordinator.hostname,
             "manufacturer": "Cockos Reaper",
-            "configuration_url": f"http://{self.coordinator.hostname}:{self.coordinator.port}"
+            "configuration_url": f"http://{self.coordinator.hostname}:{self.coordinator.port}",
         }
 
     @property

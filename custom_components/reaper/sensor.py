@@ -53,7 +53,7 @@ class ReaperSensor(CoordinatorEntity, SensorEntity):
             "name": coordinator.hostname,
             "manufacturer": "Cockos Reaper",
             "entry_type": "service",
-            "configuration_url": f"http://{coordinator.hostname}:{coordinator.port}"
+            "configuration_url": f"http://{coordinator.hostname}:{coordinator.port}",
         }
         self._attr_unique_id = f"{coordinator.hostname}-{description.key}"
         self._attrs = {ATTR_ATTRIBUTION: ATTRIBUTION}
