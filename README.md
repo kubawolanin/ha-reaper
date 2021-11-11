@@ -11,6 +11,8 @@
 
 [![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=reaper)
 
+![image](https://user-images.githubusercontent.com/2270505/141360857-4ec64e54-25ce-4e15-a49a-54fb5d3b67b9.png)
+
 # Features
 
 - monitoring current play state of REAPER instance
