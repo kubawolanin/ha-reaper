@@ -18,6 +18,8 @@
 - enabling/disabling metronome
 - enabling/disabling repeat
 - starting and stopping recording
+- sensor for total number of tracks
+- sensor for armed tracks
 - a service for running REAPER actions, start recording, undo and redo
 
 ![](preview.png)
@@ -29,6 +31,7 @@
 - `switch.record`
 - `media_player.reaper`
 - `sensor.number_of_tracks`
+- `sensor.number_of_armed_tracks`
 - `sensor.time_signature`
 - `sensor.play_state`
 

@@ -34,6 +34,12 @@ SENSORS: Final[tuple[SensorEntityDescription, ...]] = (
         name="Number of tracks",
     ),
     SensorEntityDescription(
+        key="number_of_armed_tracks",
+        device_class="reaper__number_of_armed_tracks",
+        icon="mdi:video-input-component",
+        name="Number of armed tracks",
+    ),
+    SensorEntityDescription(
         key="time_signature",
         device_class="reaper__time_signature",
         icon="mdi:timeline-clock-outline",

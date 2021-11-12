@@ -56,8 +56,9 @@ class ReaperSensor(CoordinatorEntity, SensorEntity):
         }
         self._attr_unique_id = f"{coordinator.hostname}-{description.key}"
         self._attrs = {ATTR_ATTRIBUTION: ATTRIBUTION}
-        status = json.loads(coordinator.data)
-        self._sensor_data = status.get(description.key)
+        self._description = description
+        self._status = json.loads(coordinator.data)
+        self._sensor_data = self._status[description.key]
         self.entity_description = description
 
     @property
@@ -68,13 +69,14 @@ class ReaperSensor(CoordinatorEntity, SensorEntity):
     @property
     def extra_state_attributes(self) -> dict[str, Any]:
         """Return the state attributes."""
-
+        if self._description.key == "number_of_armed_tracks":
+            self._attrs["armed_tracks"] = self._status["armed_tracks"]
         return self._attrs
 
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
-        status = json.loads(self.coordinator.data)
-        self._sensor_data = status.get(self.entity_description.key)
+        self._status = json.loads(self.coordinator.data)
+        self._sensor_data = self._status[self.entity_description.key]
 
         self.async_write_ha_state()
