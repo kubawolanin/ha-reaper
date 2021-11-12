@@ -13,6 +13,8 @@
 
 ![image](https://user-images.githubusercontent.com/2270505/141360857-4ec64e54-25ce-4e15-a49a-54fb5d3b67b9.png)
 
+![image](https://user-images.githubusercontent.com/2270505/141499488-292ee624-9aea-48d5-a79a-05c54eabbd55.png)
+
 # Features
 
 - monitoring current play state of REAPER instance
