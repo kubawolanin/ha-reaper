@@ -2,7 +2,7 @@
   "domain": "reaper",
   "name": "Reaper DAW",
   "config_flow": true,
-  "version": "0.0.2",
+  "version": "0.2.2",
   "documentation": "https://github.com/kubawolanin/ha-reaper",
   "issue_tracker": "https://github.com/kubawolanin/ha-reaper/issues",
   "requirements": [
