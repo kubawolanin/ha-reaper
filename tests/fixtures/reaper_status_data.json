@@ -85,6 +85,10 @@
     "play_state": "stopped",
     "time_signature": "4/4",
     "number_of_tracks": 4,
+    "number_of_armed_tracks": 1,
+    "armed_tracks": [
+        "Piano"
+    ],
     "beatpos": {
         "position_seconds": "10.000000000000000",
         "full_beat_position": "20.000000000000000",
