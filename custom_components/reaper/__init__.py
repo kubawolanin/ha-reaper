@@ -88,7 +88,7 @@ class ReaperDataUpdateCoordinator(DataUpdateCoordinator):
         """Initialize."""
         self.hostname = hostname
         self.port = port
-        self.update_interval = update_interval
+        self.update_interval = timedelta(seconds=update_interval)
         self.reaperdaw = Reaper(session, hostname, port, username, password)
 
         super().__init__(
